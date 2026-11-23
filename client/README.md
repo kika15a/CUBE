@@ -1,6 +1,6 @@
 # CubeCenter — Cliente (Vue 3)
 
-Esqueleto de carpetas listo. El código se agrega en la **Fase 2**.
+Vue 3 + Vite + Vue Router + Pinia + Axios. Fase 2.1 completada: base del proyecto, proxy a la API y página de inicio.
 
 | Carpeta | Propósito |
 |---|---|
@@ -14,4 +14,12 @@ Esqueleto de carpetas listo. El código se agrega en la **Fase 2**.
 | `src/views/` | Una vista por página, delgadas: ensamblan componentes y features |
 | `public/` | Archivos estáticos que se copian tal cual |
 
-Se completará con: `index.html`, `package.json`, `vite.config.js`, `src/main.js` y `src/App.vue`.
+## Comandos
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # genera dist/
+npm run lint
+```
+
