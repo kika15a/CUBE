@@ -31,7 +31,8 @@ cubecenter/                      # un solo repositorio
 │   ├── src/
 │   │   ├── api/                 # cliente Axios
 │   │   ├── assets/
-│   │   ├── components/          # reutilizables
+│   │   ├── components/          # layout/ (estructura) y ui/ (piezas reutilizables)
+│   │   ├── config/              # datos de menú y redes
 │   │   ├── composables/         # lógica reutilizable
 │   │   ├── features/            # auth/, timer/, tutorials/
 │   │   ├── router/
@@ -89,6 +90,11 @@ No necesitas ninguna API externa: todo corre en tu máquina.
 ## Roadmap
 
 1. ✅ **Fase 1** — Arquitectura por capas, POO, seguridad CIA del servidor, pruebas.
-2. ⏭ **Fase 2** — Front-end con Vue 3 + Vite + Vue Router + Pinia, componentes reutilizables y librería UI; consumo de la API REST; diseño responsive.
+2. ⏭ **Fase 2** — Front-end con Vue 3 + Vite + Vue Router + Pinia.
+   - ✅ 2.1 Base del proyecto y proxy a la API
+   - ✅ 2.2 Layout: navbar, footer y fondo de cubos flotantes
+   - 2.3 Inicio con cubos 3D, login y registro conectados a la API
+   - 2.4 Cronómetro y tutoriales
+   - 2.5 Librería de componentes y retiro de `client/legacy`
 3. **Fase 3** — Cronómetro y tiempos como componentes, persistencia por usuario, accesibilidad.
 4. **Fase 4** — Base de datos real, CI con GitHub Actions, Docker, despliegue.

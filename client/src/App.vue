@@ -1,8 +1,7 @@
 <script setup>
-// Componente raíz: solo renderiza la vista de la ruta actual.
-// El navbar, footer y fondo se agregan como componentes en la fase 2.2.
+import AppLayout from '@/components/layout/AppLayout.vue';
 </script>
 
 <template>
-  <RouterView />
+  <AppLayout />
 </template>
