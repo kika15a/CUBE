@@ -1,14 +1,14 @@
 <template>
-  <main class="not-found">
+  <section class="not-found">
     <h1>404</h1>
     <p>Esta página no existe.</p>
     <RouterLink to="/">Volver al inicio</RouterLink>
-  </main>
+  </section>
 </template>
 
 <style scoped>
 .not-found {
-  min-height: 100vh;
+  min-height: 60vh;
   display: grid;
   place-content: center;
   gap: 1rem;

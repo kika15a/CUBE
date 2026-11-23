@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
-import StatusBadge from '@/components/StatusBadge.vue';
+import StatusBadge from '@/components/ui/StatusBadge.vue';
 import { useApiStatusStore } from '@/stores/apiStatus';
 
 const apiStatus = useApiStatusStore();
@@ -8,7 +8,7 @@ onMounted(() => apiStatus.check());
 </script>
 
 <template>
-  <main class="home">
+  <div class="home">
     <h1 class="home__title">CUBE CENTER</h1>
     <p class="home__subtitle">
       Descubre formas de solucionar el cubo Rubik y registra tus tiempos.
@@ -28,14 +28,14 @@ onMounted(() => apiStatus.check());
       <p v-if="apiStatus.error" class="error">{{ apiStatus.error }}</p>
       <button type="button" class="btn" @click="apiStatus.check()">Verificar de nuevo</button>
     </section>
-  </main>
+  </div>
 </template>
 
 <style scoped>
 .home {
   max-width: 720px;
   margin: 0 auto;
-  padding: 4rem 1.25rem;
+  padding: 3rem 1.25rem;
   text-align: center;
 }
 .home__title {
