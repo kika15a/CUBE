@@ -1,10 +1,29 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBars, faCube, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faCube,
+  faRightFromBracket,
+  faRightToBracket,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { NAV_ITEMS } from '@/config/navigation';
 import { useMobileMenu } from '@/composables/useMobileMenu';
+import { useAuthStore } from '@/stores/auth';
 
 const { isOpen, toggle, close } = useMobileMenu();
+const auth = useAuthStore();
+const router = useRouter();
+
+const firstName = computed(() => auth.user?.nombre?.split(' ')[0] ?? '');
+
+async function handleLogout() {
+  await auth.logout();
+  close();
+  await router.push({ name: 'home' });
+}
 </script>
 
 <template>
@@ -31,6 +50,22 @@ const { isOpen, toggle, close } = useMobileMenu();
           <RouterLink :to="item.to" class="nav__link">
             <FontAwesomeIcon :icon="item.icon" fixed-width />
             {{ item.label }}
+          </RouterLink>
+        </li>
+
+        <template v-if="auth.isAuthenticated">
+          <li class="nav__user">Hola, {{ firstName }}</li>
+          <li>
+            <button type="button" class="nav__link nav__button" @click="handleLogout">
+              <FontAwesomeIcon :icon="faRightFromBracket" fixed-width />
+              Cerrar sesión
+            </button>
+          </li>
+        </template>
+        <li v-else>
+          <RouterLink :to="{ name: 'login' }" class="nav__link">
+            <FontAwesomeIcon :icon="faRightToBracket" fixed-width />
+            Inicia sesión
           </RouterLink>
         </li>
       </ul>
@@ -102,6 +137,18 @@ const { isOpen, toggle, close } = useMobileMenu();
 .nav__link:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
+}
+.nav__button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.nav__user {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--color-accent);
+  font-weight: 600;
 }
 .nav__link.router-link-exact-active {
   color: var(--color-accent);

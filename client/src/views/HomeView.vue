@@ -1,73 +1,90 @@
 <script setup>
-import { onMounted } from 'vue';
-import StatusBadge from '@/components/ui/StatusBadge.vue';
-import { useApiStatusStore } from '@/stores/apiStatus';
-
-const apiStatus = useApiStatusStore();
-onMounted(() => apiStatus.check());
+import CubeCard from '@/features/home/components/CubeCard.vue';
+import FeatureCard from '@/features/home/components/FeatureCard.vue';
+import { CUBES, FEATURES } from '@/features/home/homeContent';
 </script>
 
 <template>
   <div class="home">
-    <h1 class="home__title">CUBE CENTER</h1>
-    <p class="home__subtitle">
-      Descubre formas de solucionar el cubo Rubik y registra tus tiempos.
-    </p>
+    <header class="hero">
+      <h1 class="hero__title">CUBE CENTER</h1>
+      <p class="hero__text">
+        Descubre formas de solucionar el cubo Rubik, atrévete a armar los distintos cubos y
+        registra tus tiempos.
+      </p>
+    </header>
 
-    <section class="card" aria-labelledby="status-title">
-      <h2 id="status-title">Estado del sistema</h2>
-      <p>
-        Cliente Vue 3 <StatusBadge status="online" />
-      </p>
-      <p>
-        API (Express) <StatusBadge :status="apiStatus.status" />
-      </p>
-      <p v-if="apiStatus.status === 'online'" class="muted">
-        Servidor activo hace {{ apiStatus.uptime }} s.
-      </p>
-      <p v-if="apiStatus.error" class="error">{{ apiStatus.error }}</p>
-      <button type="button" class="btn" @click="apiStatus.check()">Verificar de nuevo</button>
+    <section class="cubes" aria-label="Tipos de cubo">
+      <CubeCard v-for="cube in CUBES" :key="cube.id" :cube="cube" />
+    </section>
+
+    <section class="features" aria-labelledby="features-title">
+      <h2 id="features-title" class="features__title">¿Por qué elegir Cube Center?</h2>
+      <div class="features__grid">
+        <FeatureCard
+          v-for="feature in FEATURES"
+          :key="feature.id"
+          :icon="feature.icon"
+          :title="feature.title"
+          :description="feature.description"
+        />
+      </div>
     </section>
   </div>
 </template>
 
 <style scoped>
-.home {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 3rem 1.25rem;
+.hero {
+  padding: 4rem 5% 2rem;
   text-align: center;
 }
-.home__title {
-  font-size: clamp(2rem, 6vw, 3.5rem);
+.hero__title {
+  margin-bottom: 1rem;
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+  background: linear-gradient(to right, var(--color-accent), var(--color-accent-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+.hero__text {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.cubes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem 5%;
+}
+@media (max-width: 900px) {
+  .cubes {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.features {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 4rem 5%;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+.features__title {
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: var(--color-accent);
-  letter-spacing: 0.1em;
 }
-.home__subtitle {
-  margin: 1rem 0 2rem;
-  color: var(--color-text-muted);
-}
-.card {
+.features__grid {
   display: grid;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: var(--color-surface);
-  border-radius: var(--radius);
-}
-.muted {
-  color: var(--color-text-muted);
-}
-.error {
-  color: var(--color-danger);
-}
-.btn {
-  justify-self: center;
-  padding: 0.7rem 1.5rem;
-  border: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
-  color: #111;
-  font-weight: 700;
-  cursor: pointer;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
 }
 </style>

@@ -71,6 +71,7 @@ No necesitas ninguna API externa: todo corre en tu máquina.
 
 - **Interfaz (Vue):** http://localhost:5173 con recarga en caliente (HMR): guardas y el navegador se actualiza solo.
 - **API:** http://localhost:3000/api/health, o con la extensión *Thunder Client* de VS Code.
+- **Diagnóstico (solo desarrollo):** http://localhost:5173/estado muestra si el front y la API se comunican.
 - **Sitio antiguo (legacy):** http://localhost:3000 mientras dure la migración.
 
 ## Seguridad (tríada CIA)
@@ -93,7 +94,7 @@ No necesitas ninguna API externa: todo corre en tu máquina.
 2. ⏭ **Fase 2** — Front-end con Vue 3 + Vite + Vue Router + Pinia.
    - ✅ 2.1 Base del proyecto y proxy a la API
    - ✅ 2.2 Layout: navbar, footer y fondo de cubos flotantes
-   - 2.3 Inicio con cubos 3D, login y registro conectados a la API
+   - ✅ 2.3 Inicio con cubos 3D, login y registro conectados a la API
    - 2.4 Cronómetro y tutoriales
    - 2.5 Librería de componentes y retiro de `client/legacy`
 3. **Fase 3** — Cronómetro y tiempos como componentes, persistencia por usuario, accesibilidad.

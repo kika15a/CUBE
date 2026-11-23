@@ -45,7 +45,9 @@ export class AuthController {
     });
   };
 
+  /** Siempre 200: el front lo usa al arrancar para saber si hay sesión activa. */
   me = (req, res) => {
-    res.json({ autenticado: true, usuario: req.session.user });
+    const usuario = req.session?.user ?? null;
+    res.json({ autenticado: usuario !== null, usuario });
   };
 }
