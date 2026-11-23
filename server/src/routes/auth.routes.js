@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { requireAuth } from '../middlewares/auth.js';
 import { authLimiter } from '../middlewares/rateLimiters.js';
 import { validateBody } from '../middlewares/validate.js';
 import { loginSchema, registerSchema } from '../validators/auth.schemas.js';
@@ -11,7 +10,7 @@ export function createAuthRouter(controller) {
   router.post('/register', authLimiter, validateBody(registerSchema), controller.register);
   router.post('/login', authLimiter, validateBody(loginSchema), controller.login);
   router.post('/logout', controller.logout);
-  router.get('/me', requireAuth, controller.me);
+  router.get('/me', controller.me);
 
   return router;
 }

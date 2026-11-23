@@ -1,13 +1,13 @@
 # CubeCenter — Cliente (Vue 3)
 
-Vue 3 + Vite + Vue Router + Pinia + Axios. Fases completadas: 2.1 (base, proxy a la API) y 2.2 (layout: navbar, footer y fondo de cubos flotantes).
+Vue 3 + Vite + Vue Router + Pinia + Axios. Fases completadas: 2.1 (base y proxy), 2.2 (layout) y 2.3 (inicio, login y registro conectados a la API).
 
 | Carpeta | Propósito |
 |---|---|
 | `src/api/` | Cliente HTTP (Axios) y funciones que llaman a la API |
 | `src/assets/` | Imágenes, fuentes y estilos globales |
 | `src/components/layout/` | Estructura de página: `AppLayout`, `AppNavbar`, `AppFooter` |
-| `src/components/ui/` | Piezas visuales reutilizables: `FloatingCubes`, `StatusBadge` |
+| `src/components/ui/` | Piezas reutilizables: `RubikCube`, `GlassCard`, `AppButton`, `BaseInput`, `FloatingCubes`, `StatusBadge` |
 | `src/config/` | Datos de configuración: enlaces del menú y redes sociales |
 | `src/composables/` | Lógica reutilizable con la Composition API (`useTimer`, `useAuth`) |
 | `src/features/` | Módulos por dominio: `auth/`, `timer/`, `tutorials/` |

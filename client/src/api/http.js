@@ -21,3 +21,9 @@ export function getErrorMessage(error) {
     'No se pudo conectar con el servidor'
   );
 }
+
+/** Errores por campo que envía la API en 400 (p. ej. { email: 'Correo inválido' }). */
+export function getFieldErrors(error) {
+  const details = error?.response?.data?.error?.details;
+  return details && typeof details === 'object' ? details : {};
+}
