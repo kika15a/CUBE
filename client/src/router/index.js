@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue'), // carga diferida (code splitting)
+    component: () => import('@/views/HomeView.vue'),
     meta: { title: 'Inicio' },
   },
   {
@@ -25,17 +25,18 @@ const routes = [
     component: () => import('@/views/RegisterView.vue'),
     meta: { title: 'Crear cuenta', guestOnly: true },
   },
-  // Marcadores de posición hasta migrar cada página (fase 2.4)
-  ...[
-    { path: '/tiempos', name: 'tiempos', title: 'Tiempos' },
-    { path: '/tutoriales', name: 'tutoriales', title: 'Tutoriales' },
-  ].map(({ path, name, title }) => ({
-    path,
-    name,
-    component: () => import('@/views/ComingSoonView.vue'),
-    props: { title },
-    meta: { title },
-  })),
+  {
+    path: '/tiempos',
+    name: 'tiempos',
+    component: () => import('@/views/TimerView.vue'),
+    meta: { title: 'Cronómetro' },
+  },
+  {
+    path: '/tutoriales',
+    name: 'tutoriales',
+    component: () => import('@/views/TutorialsView.vue'),
+    meta: { title: 'Tutoriales' },
+  },
   // Diagnóstico: solo se registra en desarrollo
   ...(import.meta.env.DEV
     ? [
@@ -61,8 +62,7 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
 });
 
-// Guardia global: espera a saber si hay sesión y aplica las reglas de acceso.
-// (Pinia ya está instalado cuando corre: ver orden de use() en main.js)
+
 router.beforeEach(async (to) => {
   const auth = useAuthStore();
   await auth.init();

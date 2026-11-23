@@ -38,8 +38,16 @@ const cubes = computed(() =>
 
 <template>
   <!-- Decorativo: oculto para lectores de pantalla y sin interceptar clics -->
-  <div class="floating-cubes" aria-hidden="true">
-    <span v-for="cube in cubes" :key="cube.id" class="floating-cubes__cube" :style="cube.style" />
+  <div
+    class="floating-cubes"
+    aria-hidden="true"
+  >
+    <span
+      v-for="cube in cubes"
+      :key="cube.id"
+      class="floating-cubes__cube"
+      :style="cube.style"
+    />
   </div>
 </template>
 

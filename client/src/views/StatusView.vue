@@ -13,12 +13,22 @@ onMounted(() => apiStatus.check());
 <template>
   <section class="status">
     <h1>Estado del sistema</h1>
-    <GlassCard :lift="false" class="status__card">
+    <GlassCard
+      :lift="false"
+      class="status__card"
+    >
       <p>Cliente Vue 3 <StatusBadge status="online" /></p>
       <p>API (Express) <StatusBadge :status="apiStatus.status" /></p>
-      <p v-if="apiStatus.status === 'online'">Servidor activo hace {{ apiStatus.uptime }} s.</p>
-      <p v-if="apiStatus.error">{{ apiStatus.error }}</p>
-      <AppButton :loading="apiStatus.status === 'loading'" @click="apiStatus.check()">
+      <p v-if="apiStatus.status === 'online'">
+        Servidor activo hace {{ apiStatus.uptime }} s.
+      </p>
+      <p v-if="apiStatus.error">
+        {{ apiStatus.error }}
+      </p>
+      <AppButton
+        :loading="apiStatus.status === 'loading'"
+        @click="apiStatus.check()"
+      >
         Verificar de nuevo
       </AppButton>
     </GlassCard>

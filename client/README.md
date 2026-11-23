@@ -1,27 +1,41 @@
 # CubeCenter — Cliente (Vue 3)
 
-Vue 3 + Vite + Vue Router + Pinia + Axios. Fases completadas: 2.1 (base y proxy), 2.2 (layout) y 2.3 (inicio, login y registro conectados a la API).
+Frontend de la aplicación **CubeCenter**, construido con **Vue 3**, **Vite**, **Vue Router**, **Pinia** y **Axios**.
+
+**Progreso actual:** Fases 2.1 (base + proxy), 2.2 (*layout*), 2.3 (login/registro con apodo) y 2.4 (cronómetro con persistencia por usuario + tutoriales) completadas.
+
+---
+
+## Estructura de carpetas
 
 | Carpeta | Propósito |
-|---|---|
-| `src/api/` | Cliente HTTP (Axios) y funciones que llaman a la API |
-| `src/assets/` | Imágenes, fuentes y estilos globales |
-| `src/components/layout/` | Estructura de página: `AppLayout`, `AppNavbar`, `AppFooter` |
-| `src/components/ui/` | Piezas reutilizables: `RubikCube`, `GlassCard`, `AppButton`, `BaseInput`, `FloatingCubes`, `StatusBadge` |
-| `src/config/` | Datos de configuración: enlaces del menú y redes sociales |
-| `src/composables/` | Lógica reutilizable con la Composition API (`useTimer`, `useAuth`) |
-| `src/features/` | Módulos por dominio: `auth/`, `timer/`, `tutorials/` |
-| `src/router/` | Rutas (Vue Router) y guardias de navegación |
-| `src/stores/` | Estado global (Pinia) |
-| `src/views/` | Una vista por página, delgadas: ensamblan componentes y features |
-| `public/` | Archivos estáticos que se copian tal cual |
+| :--- | :--- |
+| `src/api/` | Instancia de Axios (`http.js`) y funciones de consumo de la API |
+| `src/assets/` | Estilos globales y *tokens* de diseño |
+| `src/components/layout/` | *Navbar*, *footer* y estructura general de vistas |
+| `src/components/ui/` | Componentes reutilizables: botones, *inputs*, *cards*, cubo 3D, etc. |
+| `src/composables/` | Lógica reactiva reutilizable: `useForm`, `useTimer`, `useMobileMenu` |
+| `src/features/` | Módulos por dominio: `auth/`, `timer/`, `tutorials/`, `home/` |
+| `src/router/` | Definición de rutas y guardias de navegación |
+| `src/stores/` | Estado global con Pinia (`auth`, `times`, `apiStatus`) |
+| `src/views/` | Vistas de página que ensamblan componentes de `features/` |
+| `public/` | Archivos estáticos copiados sin transformación al *build* |
+
+---
 
 ## Comandos
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # genera dist/
-npm run lint
+npm run dev      # Servidor de desarrollo en http://localhost:5173
+npm run build    # Genera la versión de producción en dist/
+npm run lint     # Revisa reglas de código / estilo
 ```
 
+---
+
+## Notas técnicas
+
+* El proxy de Vite (`vite.config.js`) redirige `/api/*` hacia `http://localhost:3000`, evitando problemas de CORS en desarrollo y permitiendo el envío de cookies de sesión.
+* Los componentes que se reutilizan en más de una *feature* se promueven a `src/components/ui/`.
+* La carpeta `legacy/` conserva el sitio anterior en HTML/CSS/JS y se eliminará al concluir la Fase 2.5.

@@ -6,11 +6,18 @@ import LoginForm from '@/features/auth/components/LoginForm.vue';
 <template>
   <section class="auth">
     <header class="auth__header">
-      <h1 class="auth__title">Iniciar sesión</h1>
+      <h1 class="auth__title">
+        Iniciar sesión
+      </h1>
       <p>Nos emociona tenerte de nuevo aquí. Bienvenido.</p>
     </header>
-    <GlassCard class="auth__card" :lift="false">
-      <h2 class="auth__subtitle">Bienvenido</h2>
+    <GlassCard
+      class="auth__card"
+      :lift="false"
+    >
+      <h2 class="auth__subtitle">
+        Bienvenido
+      </h2>
       <LoginForm />
     </GlassCard>
   </section>

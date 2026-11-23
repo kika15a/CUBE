@@ -17,8 +17,15 @@ const LABELS = {
 </script>
 
 <template>
-  <span class="badge" :class="`badge--${status}`" role="status">
-    <span class="badge__dot" aria-hidden="true" />
+  <span
+    class="badge"
+    :class="`badge--${status}`"
+    role="status"
+  >
+    <span
+      class="badge__dot"
+      aria-hidden="true"
+    />
     {{ LABELS[status] }}
   </span>
 </template>

@@ -8,8 +8,14 @@ const isExternal = (href) => href.startsWith('http');
 
 <template>
   <footer class="footer">
-    <ul class="social" aria-label="Redes sociales">
-      <li v-for="link in SOCIAL_LINKS" :key="link.label">
+    <ul
+      class="social"
+      aria-label="Redes sociales"
+    >
+      <li
+        v-for="link in SOCIAL_LINKS"
+        :key="link.label"
+      >
         <a
           :href="link.href"
           :aria-label="link.label"

@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { faEnvelope, faLock, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faEnvelope, faLock, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AppButton from '@/components/ui/AppButton.vue';
 import BaseInput from '@/components/ui/BaseInput.vue';
@@ -13,18 +13,33 @@ const auth = useAuthStore();
 const router = useRouter();
 
 const { values, errors, formError, isSubmitting, submit } = useForm({
-  initialValues: { nombre: '', email: '', password: '', confirmPassword: '', terms: false },
+  initialValues: {
+    nombre: '',
+    apodo: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    terms: false,
+  },
   validate: validateRegister,
-  onSubmit: async ({ nombre, email, password }) => {
-    // Solo se envía lo que la API acepta (confirmPassword y terms son del cliente)
-    await auth.register({ nombre: nombre.trim(), email: email.trim(), password });
+  onSubmit: async ({ nombre, apodo, email, password }) => {
+    await auth.register({
+      nombre: nombre.trim(),
+      apodo: apodo.trim(),
+      email: email.trim(),
+      password,
+    });
     await router.push({ name: 'home' });
   },
 });
 </script>
 
 <template>
-  <form class="form" novalidate @submit.prevent="submit">
+  <form
+    class="form"
+    novalidate
+    @submit.prevent="submit"
+  >
     <FormAlert :message="formError" />
 
     <BaseInput
@@ -34,6 +49,14 @@ const { values, errors, formError, isSubmitting, submit } = useForm({
       :error="errors.nombre"
       autocomplete="name"
       placeholder="Tu nombre"
+    />
+    <BaseInput
+      v-model="values.apodo"
+      label="Apodo"
+      :icon="faAt"
+      :error="errors.apodo"
+      autocomplete="nickname"
+      placeholder="Tu alias (letras, números, _ y -)"
     />
     <BaseInput
       v-model="values.email"
@@ -69,20 +92,32 @@ const { values, errors, formError, isSubmitting, submit } = useForm({
           v-model="values.terms"
           type="checkbox"
           :aria-invalid="errors.terms ? 'true' : undefined"
-        />
+        >
         Acepto los términos y condiciones y la política de privacidad
       </label>
-      <p v-if="errors.terms" class="terms__error" role="alert">{{ errors.terms }}</p>
+      <p
+        v-if="errors.terms"
+        class="terms__error"
+        role="alert"
+      >
+        {{ errors.terms }}
+      </p>
     </div>
 
-    <AppButton type="submit" block :loading="isSubmitting">
+    <AppButton
+      type="submit"
+      block
+      :loading="isSubmitting"
+    >
       <FontAwesomeIcon :icon="faUserPlus" />
       {{ isSubmitting ? 'Creando cuenta…' : 'Registrarse' }}
     </AppButton>
 
     <p class="form__footer">
       ¿Ya tienes una cuenta?
-      <RouterLink :to="{ name: 'login' }">Inicia sesión</RouterLink>
+      <RouterLink :to="{ name: 'login' }">
+        Inicia sesión
+      </RouterLink>
     </p>
   </form>
 </template>

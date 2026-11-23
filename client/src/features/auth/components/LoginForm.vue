@@ -25,7 +25,11 @@ const { values, errors, formError, isSubmitting, submit } = useForm({
 </script>
 
 <template>
-  <form class="form" novalidate @submit.prevent="submit">
+  <form
+    class="form"
+    novalidate
+    @submit.prevent="submit"
+  >
     <FormAlert :message="formError" />
 
     <BaseInput
@@ -47,14 +51,20 @@ const { values, errors, formError, isSubmitting, submit } = useForm({
       placeholder="••••••••"
     />
 
-    <AppButton type="submit" block :loading="isSubmitting">
+    <AppButton
+      type="submit"
+      block
+      :loading="isSubmitting"
+    >
       <FontAwesomeIcon :icon="faRightToBracket" />
       {{ isSubmitting ? 'Ingresando…' : 'Iniciar sesión' }}
     </AppButton>
 
     <p class="form__footer">
       ¿No tienes una cuenta?
-      <RouterLink :to="{ name: 'registro' }">Regístrate aquí</RouterLink>
+      <RouterLink :to="{ name: 'registro' }">
+        Regístrate aquí
+      </RouterLink>
     </p>
   </form>
 </template>

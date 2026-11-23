@@ -1,12 +1,9 @@
 import helmet from 'helmet';
 import { env } from '../config/env.js';
 
-const CDN = 'https://cdnjs.cloudflare.com'; // Font Awesome (sitio legacy)
-
 /**
  * Cabeceras de seguridad (helmet + CSP estricta).
- * TODO (Fase 2): al migrar a Vue/Vite se eliminan los estilos inline y se quita
- * 'unsafe-inline' de style-src.
+ * Sin legacy ya no hay estilos inline ni CDN externo: CSP cerrada.
  */
 export const securityHeaders = helmet({
   contentSecurityPolicy: {
@@ -14,8 +11,8 @@ export const securityHeaders = helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", CDN],
-      fontSrc: ["'self'", CDN],
+      styleSrc: ["'self'", "'unsafe-inline'"], // Vue/Vite inyecta estilos en dev
+      fontSrc: ["'self'"],
       imgSrc: ["'self'", 'data:'],
       mediaSrc: ["'self'"],
       connectSrc: ["'self'"],
@@ -27,7 +24,7 @@ export const securityHeaders = helmet({
     },
   },
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
-  crossOriginEmbedderPolicy: false, // permite cargar la hoja de Font Awesome del CDN
+  crossOriginEmbedderPolicy: false,
 });
 
 /** Las respuestas de la API nunca deben guardarse en caché (datos de sesión). */

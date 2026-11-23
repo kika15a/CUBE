@@ -8,7 +8,11 @@ defineProps({
 </script>
 
 <template>
-  <component :is="as" class="glass" :class="{ 'glass--lift': lift }">
+  <component
+    :is="as"
+    class="glass"
+    :class="{ 'glass--lift': lift }"
+  >
     <slot />
   </component>
 </template>

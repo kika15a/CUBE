@@ -10,9 +10,16 @@ defineProps({
 
 <template>
   <article class="feature">
-    <FontAwesomeIcon :icon="icon" class="feature__icon" />
-    <h3 class="feature__title">{{ title }}</h3>
-    <p class="feature__text">{{ description }}</p>
+    <FontAwesomeIcon
+      :icon="icon"
+      class="feature__icon"
+    />
+    <h3 class="feature__title">
+      {{ title }}
+    </h3>
+    <p class="feature__text">
+      {{ description }}
+    </p>
   </article>
 </template>
 

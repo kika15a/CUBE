@@ -25,8 +25,15 @@ const inputType = computed(() => (isPassword.value && showPassword.value ? 'text
 
 <template>
   <div class="field">
-    <label :for="id" class="field__label">
-      <FontAwesomeIcon v-if="icon" :icon="icon" fixed-width />
+    <label
+      :for="id"
+      class="field__label"
+    >
+      <FontAwesomeIcon
+        v-if="icon"
+        :icon="icon"
+        fixed-width
+      />
       {{ label }}
     </label>
 
@@ -40,7 +47,7 @@ const inputType = computed(() => (isPassword.value && showPassword.value ? 'text
         :class="{ 'field__input--error': error }"
         :aria-invalid="error ? 'true' : undefined"
         :aria-describedby="error ? errorId : undefined"
-      />
+      >
       <button
         v-if="isPassword"
         type="button"
@@ -53,7 +60,14 @@ const inputType = computed(() => (isPassword.value && showPassword.value ? 'text
       </button>
     </div>
 
-    <p v-if="error" :id="errorId" class="field__error" role="alert">{{ error }}</p>
+    <p
+      v-if="error"
+      :id="errorId"
+      class="field__error"
+      role="alert"
+    >
+      {{ error }}
+    </p>
   </div>
 </template>
 
