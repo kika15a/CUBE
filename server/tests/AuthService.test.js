@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { AuthService } from '../src/services/AuthService.js';
 import { AuthenticationError, ConflictError } from '../src/errors/AppError.js';
 
-/** Repositorio falso en memoria: demuestra la inyección de dependencias. */
 class InMemoryUserRepository {
   #users = [];
   async findByEmail(email) {
@@ -14,6 +13,7 @@ class InMemoryUserRepository {
   }
   async create(user) {
     if (this.#users.some((u) => u.email === user.email)) throw new ConflictError();
+    if (user.apodo && this.#users.some((u) => u.apodo === user.apodo)) throw new ConflictError();
     this.#users.push(user);
     return user;
   }
@@ -22,7 +22,7 @@ class InMemoryUserRepository {
 const makeService = () =>
   new AuthService({ userRepository: new InMemoryUserRepository(), bcryptRounds: 10 });
 
-const data = { nombre: 'Ana', email: 'ana@mail.com', password: 'Cubo1234' };
+const data = { nombre: 'Ana', apodo: 'ana_cuber', email: 'ana@mail.com', password: 'Cubo1234' };
 
 test('register guarda un hash, no la contraseña en claro', async () => {
   const user = await makeService().register(data);
@@ -36,11 +36,21 @@ test('register rechaza email duplicado', async () => {
   await assert.rejects(svc.register(data), ConflictError);
 });
 
+test('register rechaza apodo duplicado', async () => {
+  const svc = makeService();
+  await svc.register(data);
+  await assert.rejects(
+    svc.register({ ...data, email: 'otro@mail.com' }),
+    ConflictError,
+  );
+});
+
 test('authenticate: credenciales correctas devuelven el usuario', async () => {
   const svc = makeService();
   await svc.register(data);
   const user = await svc.authenticate({ email: data.email, password: data.password });
   assert.equal(user.email, data.email);
+  assert.equal(user.apodo, 'ana_cuber');
 });
 
 test('authenticate: usuario inexistente y contraseña errónea dan el MISMO error', async () => {

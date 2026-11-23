@@ -4,11 +4,20 @@
  * y el backend siempre vuelve a validar (nunca se confía en el cliente).
  */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const APODO_RE = /^[a-zA-Z0-9_-]+$/;
 
 function validateEmail(value) {
   const email = value.trim();
   if (!email) return 'El correo es obligatorio';
   if (email.length > 254 || !EMAIL_RE.test(email)) return 'Correo electrónico inválido';
+  return null;
+}
+
+function validateApodo(value) {
+  const apodo = value.trim();
+  if (apodo.length < 2) return 'El apodo debe tener al menos 2 caracteres';
+  if (apodo.length > 20) return 'El apodo no puede exceder 20 caracteres';
+  if (!APODO_RE.test(apodo)) return 'Solo letras, números, guiones y guiones bajos';
   return null;
 }
 
@@ -20,7 +29,6 @@ function validateNewPassword(value) {
   return null;
 }
 
-/** Quita las claves sin error para devolver solo los campos inválidos. */
 const compact = (errors) => Object.fromEntries(Object.entries(errors).filter(([, msg]) => msg));
 
 export function validateLogin({ email, password }) {
@@ -30,7 +38,7 @@ export function validateLogin({ email, password }) {
   });
 }
 
-export function validateRegister({ nombre, email, password, confirmPassword, terms }) {
+export function validateRegister({ nombre, apodo, email, password, confirmPassword, terms }) {
   const name = nombre.trim();
   return compact({
     nombre:
@@ -39,6 +47,7 @@ export function validateRegister({ nombre, email, password, confirmPassword, ter
         : name.length > 60
           ? 'El nombre es demasiado largo'
           : null,
+    apodo: validateApodo(apodo),
     email: validateEmail(email),
     password: validateNewPassword(password),
     confirmPassword: confirmPassword === password ? null : 'Las contraseñas no coinciden',

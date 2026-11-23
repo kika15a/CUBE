@@ -28,8 +28,16 @@ async function handleLogout() {
 
 <template>
   <header class="navbar">
-    <RouterLink :to="{ name: 'home' }" class="logo" aria-label="Cube Center — ir al inicio" @click="close">
-      <FontAwesomeIcon :icon="faCube" class="logo__icon" />
+    <RouterLink
+      :to="{ name: 'home' }"
+      class="logo"
+      aria-label="Cube Center — ir al inicio"
+      @click="close"
+    >
+      <FontAwesomeIcon
+        :icon="faCube"
+        class="logo__icon"
+      />
       <span class="logo__text">CUBE CENTER</span>
     </RouterLink>
 
@@ -44,27 +52,56 @@ async function handleLogout() {
       <FontAwesomeIcon :icon="isOpen ? faXmark : faBars" />
     </button>
 
-    <nav id="main-nav" class="nav" :class="{ 'nav--open': isOpen }" aria-label="Principal">
+    <nav
+      id="main-nav"
+      class="nav"
+      :class="{ 'nav--open': isOpen }"
+      aria-label="Principal"
+    >
       <ul class="nav__list">
-        <li v-for="item in NAV_ITEMS" :key="item.label">
-          <RouterLink :to="item.to" class="nav__link">
-            <FontAwesomeIcon :icon="item.icon" fixed-width />
+        <li
+          v-for="item in NAV_ITEMS"
+          :key="item.label"
+        >
+          <RouterLink
+            :to="item.to"
+            class="nav__link"
+          >
+            <FontAwesomeIcon
+              :icon="item.icon"
+              fixed-width
+            />
             {{ item.label }}
           </RouterLink>
         </li>
 
         <template v-if="auth.isAuthenticated">
-          <li class="nav__user">Hola, {{ firstName }}</li>
+          <li class="nav__user">
+            Hola, {{ firstName }}
+          </li>
           <li>
-            <button type="button" class="nav__link nav__button" @click="handleLogout">
-              <FontAwesomeIcon :icon="faRightFromBracket" fixed-width />
+            <button
+              type="button"
+              class="nav__link nav__button"
+              @click="handleLogout"
+            >
+              <FontAwesomeIcon
+                :icon="faRightFromBracket"
+                fixed-width
+              />
               Cerrar sesión
             </button>
           </li>
         </template>
         <li v-else>
-          <RouterLink :to="{ name: 'login' }" class="nav__link">
-            <FontAwesomeIcon :icon="faRightToBracket" fixed-width />
+          <RouterLink
+            :to="{ name: 'login' }"
+            class="nav__link"
+          >
+            <FontAwesomeIcon
+              :icon="faRightToBracket"
+              fixed-width
+            />
             Inicia sesión
           </RouterLink>
         </li>

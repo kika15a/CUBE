@@ -8,7 +8,7 @@ export const apiNotFound = (_req, _res, next) => next(new NotFoundError('Ruta de
  * Manejador global. Confidencialidad: solo las AppError muestran su mensaje;
  * cualquier otro error devuelve un 500 genérico (sin stack ni detalles internos).
  */
-// eslint-disable-next-line no-unused-vars
+ 
 export const errorHandler = (err, req, res, _next) => {
   if (res.headersSent) return;
 

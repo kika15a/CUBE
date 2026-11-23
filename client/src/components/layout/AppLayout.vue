@@ -8,9 +8,16 @@ import FloatingCubes from '@/components/ui/FloatingCubes.vue';
   <FloatingCubes />
   <div class="layout">
     <!-- Accesibilidad: permite a usuarios de teclado saltar el menú -->
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <a
+      class="skip-link"
+      href="#contenido"
+    >Saltar al contenido</a>
     <AppNavbar />
-    <main id="contenido" class="layout__main" tabindex="-1">
+    <main
+      id="contenido"
+      class="layout__main"
+      tabindex="-1"
+    >
       <RouterView />
     </main>
     <AppFooter />

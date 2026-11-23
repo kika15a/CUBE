@@ -1,11 +1,6 @@
 import { ConflictError } from '../errors/AppError.js';
 import { User } from '../models/User.js';
 
-/**
- * Repositorio de usuarios: único punto que conoce cómo se guardan.
- * Los servicios dependen de ESTA interfaz (findByEmail, findById, create),
- * no del almacenamiento; cambiar a PostgreSQL/MongoDB no tocará la lógica de negocio.
- */
 export class UserRepository {
   #storage;
 
@@ -27,15 +22,17 @@ export class UserRepository {
   }
 
   /**
-   * Inserta un usuario garantizando unicidad de email de forma atómica
-   * (la verificación y la escritura ocurren dentro de la misma transacción).
+   * Inserta un usuario garantizando unicidad de email Y apodo de forma atómica.
    * @param {User} user
-   * @throws {ConflictError} si el email ya existe
+   * @throws {ConflictError} si el email o el apodo ya existen
    */
   async create(user) {
     await this.#storage.transaction((records) => {
       if (records.some((r) => r.email === user.email)) {
         throw new ConflictError('El correo electrónico ya está registrado');
+      }
+      if (user.apodo && records.some((r) => r.apodo === user.apodo)) {
+        throw new ConflictError('Ese apodo ya está en uso');
       }
       records.push(user.toRecord());
     });

@@ -7,19 +7,36 @@ import { CUBES, FEATURES } from '@/features/home/homeContent';
 <template>
   <div class="home">
     <header class="hero">
-      <h1 class="hero__title">CUBE CENTER</h1>
+      <h1 class="hero__title">
+        CUBE CENTER
+      </h1>
       <p class="hero__text">
         Descubre formas de solucionar el cubo Rubik, atrévete a armar los distintos cubos y
         registra tus tiempos.
       </p>
     </header>
 
-    <section class="cubes" aria-label="Tipos de cubo">
-      <CubeCard v-for="cube in CUBES" :key="cube.id" :cube="cube" />
+    <section
+      class="cubes"
+      aria-label="Tipos de cubo"
+    >
+      <CubeCard
+        v-for="cube in CUBES"
+        :key="cube.id"
+        :cube="cube"
+      />
     </section>
 
-    <section class="features" aria-labelledby="features-title">
-      <h2 id="features-title" class="features__title">¿Por qué elegir Cube Center?</h2>
+    <section
+      class="features"
+      aria-labelledby="features-title"
+    >
+      <h2
+        id="features-title"
+        class="features__title"
+      >
+        ¿Por qué elegir Cube Center?
+      </h2>
       <div class="features__grid">
         <FeatureCard
           v-for="feature in FEATURES"

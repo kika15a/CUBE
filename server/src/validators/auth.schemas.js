@@ -7,10 +7,16 @@ const email = z
   .max(254, 'Correo demasiado largo')
   .email('Correo electrónico inválido');
 
+const apodo = z
+  .string({ required_error: 'El apodo es obligatorio' })
+  .trim()
+  .min(2, 'El apodo debe tener al menos 2 caracteres')
+  .max(20, 'El apodo no puede exceder 20 caracteres')
+  .regex(/^[a-zA-Z0-9_-]+$/, 'Solo letras, números, guiones y guiones bajos');
+
 /**
- * `.strict()` rechaza campos desconocidos: evita "mass assignment"
- * (p. ej. que alguien envíe `rol: "admin"` en el registro).
- * bcrypt solo procesa 72 bytes, por eso el máximo es 72.
+ * .strict() rechaza campos desconocidos (evita mass assignment de "rol").
+ * bcrypt solo procesa 72 bytes, por eso el máximo de la contraseña es 72.
  */
 export const registerSchema = z
   .object({
@@ -19,6 +25,7 @@ export const registerSchema = z
       .trim()
       .min(2, 'El nombre debe tener al menos 2 caracteres')
       .max(60, 'El nombre es demasiado largo'),
+    apodo,
     email,
     password: z
       .string({ required_error: 'La contraseña es obligatoria' })
@@ -35,3 +42,4 @@ export const loginSchema = z
     password: z.string({ required_error: 'La contraseña es obligatoria' }).min(1).max(72),
   })
   .strict();
+  

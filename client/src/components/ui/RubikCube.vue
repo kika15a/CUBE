@@ -35,8 +35,18 @@ const cubeStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="cube" :style="cubeStyle" role="img" :aria-label="label">
-    <div v-for="face in FACE_NAMES" :key="face" class="cube__face" :class="`cube__face--${face}`">
+  <div
+    class="cube"
+    :style="cubeStyle"
+    role="img"
+    :aria-label="label"
+  >
+    <div
+      v-for="face in FACE_NAMES"
+      :key="face"
+      class="cube__face"
+      :class="`cube__face--${face}`"
+    >
       <span
         v-for="(color, index) in stickersOf(face)"
         :key="index"

@@ -8,7 +8,11 @@ defineProps({
 </script>
 
 <template>
-  <p v-if="message" class="alert" role="alert">
+  <p
+    v-if="message"
+    class="alert"
+    role="alert"
+  >
     <FontAwesomeIcon :icon="faCircleExclamation" />
     {{ message }}
   </p>

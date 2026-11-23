@@ -8,7 +8,9 @@ defineProps({
   <section class="coming-soon">
     <h1>{{ title }}</h1>
     <p>Esta sección se está migrando a la nueva versión de Cube Center.</p>
-    <RouterLink :to="{ name: 'home' }">Volver al inicio</RouterLink>
+    <RouterLink :to="{ name: 'home' }">
+      Volver al inicio
+    </RouterLink>
   </section>
 </template>
 

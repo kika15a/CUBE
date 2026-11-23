@@ -15,10 +15,19 @@ const PREVIEW_FACES = {
 
 <template>
   <section class="auth">
-    <GlassCard class="auth__card" :lift="false">
-      <h1 class="auth__title">Crear cuenta</h1>
+    <GlassCard
+      class="auth__card"
+      :lift="false"
+    >
+      <h1 class="auth__title">
+        Crear cuenta
+      </h1>
       <div class="auth__cube">
-        <RubikCube :faces="PREVIEW_FACES" :dimension="100" label="Cubo Rubik decorativo" />
+        <RubikCube
+          :faces="PREVIEW_FACES"
+          :dimension="100"
+          label="Cubo Rubik decorativo"
+        />
       </div>
       <RegisterForm />
     </GlassCard>

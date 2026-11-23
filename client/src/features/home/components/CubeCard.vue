@@ -10,11 +10,24 @@ defineProps({
 </script>
 
 <template>
-  <GlassCard as="article" class="cube-card">
-    <RubikCube :grid="cube.grid" :faces="cube.faces" :label="`Cubo Rubik ${cube.title}`" />
-    <h3 class="cube-card__title">{{ cube.title }}</h3>
-    <p class="cube-card__description">{{ cube.description }}</p>
-    <AppButton :to="{ name: 'tutoriales' }">Descubre más</AppButton>
+  <GlassCard
+    as="article"
+    class="cube-card"
+  >
+    <RubikCube
+      :grid="cube.grid"
+      :faces="cube.faces"
+      :label="`Cubo Rubik ${cube.title}`"
+    />
+    <h3 class="cube-card__title">
+      {{ cube.title }}
+    </h3>
+    <p class="cube-card__description">
+      {{ cube.description }}
+    </p>
+    <AppButton :to="{ name: 'tutoriales' }">
+      Descubre más
+    </AppButton>
   </GlassCard>
 </template>
 
