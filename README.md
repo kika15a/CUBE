@@ -45,23 +45,32 @@ cubecenter/                      # un solo repositorio
 
 ## Arranque rápido
 
-Requiere Node.js >= 20.6.
+Requiere Node.js >= 20.6. Se usan **dos terminales** (backend y frontend).
 
 ```bash
+# Terminal 1 — Backend (API en http://localhost:3000)
 cd server
 npm install
-npm run setup:env     # crea .env con un SESSION_SECRET seguro
-npm run dev           # http://localhost:3000
-npm test
+npm run setup:env     # crea .env (solo la primera vez)
+npm run dev
+
+# Terminal 2 — Frontend (Vue en http://localhost:5173)
+cd client
+npm install
+npm run dev
 ```
+
+> En `server/.env` debe estar `CLIENT_ORIGIN=http://localhost:5173`.
+
+Pruebas del backend: `cd server && npm test` (en una tercera terminal o con el servidor detenido).
 
 ## Cómo previsualizar
 
-No necesitas ninguna API externa de previsualización: el servidor corre en tu máquina.
+No necesitas ninguna API externa: todo corre en tu máquina.
 
-- **Ahora (Fase 1):** abre http://localhost:3000. Cambios en `server/src` reinician el servidor solos (nodemon); para HTML/CSS recarga el navegador.
-- **Probar la API:** con la extensión *Thunder Client* de VS Code (o `curl`) contra `http://localhost:3000/api/...`.
-- **Desde la Fase 2:** Vite dará recarga en caliente (HMR) en http://localhost:5173; el cambio se ve al guardar, sin recargar.
+- **Interfaz (Vue):** http://localhost:5173 con recarga en caliente (HMR): guardas y el navegador se actualiza solo.
+- **API:** http://localhost:3000/api/health, o con la extensión *Thunder Client* de VS Code.
+- **Sitio antiguo (legacy):** http://localhost:3000 mientras dure la migración.
 
 ## Seguridad (tríada CIA)
 
